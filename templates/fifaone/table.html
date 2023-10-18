@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Academy</title>
+</head>
+<style>
+.headup {
+    background-color: lightblue;
+}
+</style>
+<body>
+	<div class="container-fluid">
+	<h2 class="headup">The Academy</h2></br>
+        <h4>2019 Season</h4>
+
+		<div class="form-row">
+			<form class="form-inline" method="POST">
+    				<div class="form-group">
+    					{% csrf_token %}
+    					{{form.as_p}}
+					
+    				</div>
+	    			<button type="submit" class="btn btn-success">submit</button>
+			</form>
+		</div>
+                 <h3>Standings</h3>
+                        <table class="table table-hover table-bordered">
+                            <thead class="thead-dark">
+			     <tr>
+                                <th>Name</th>
+                                <th>Win %</th>
+                                <th>wins</th>
+                                <th>losses</th>
+                                <th>Draws</th>
+                             </tr>
+		            </thead>
+                        {% for stands in standings %}
+                             <tr>
+                                <td>{{stands.team}}<img src="{{stands.logo}}" height="50" width="50"></td>
+                                <td>{{stands.percentage|floatformat:3}}</td>
+                                <td>{{stands.wins}}</td>
+                                <td>{{stands.losses}}</td>
+                                <td>{{stands.draws}}</td>
+				
+                             </tr>
+                        {% endfor %}
+                        </table>
+		
+		        <h3>Match History</h3>
+		        <table class="table table-striped table-sm">
+
+
+			    <tr>
+    				<th class="text-center">Home</th>
+    				<th class="text-center">Goals</th>
+    				<th class="text-center">- </th>
+    				<th class="text-center">Goals</th>
+    				<th class="text-center">Away</th>
+
+			    </tr>
+			{% for posts in fifa %}
+			    <tr>
+    				<td class="text-center">{{posts.hometeam}}</td>
+    				<td class="text-center">{{posts.homescore}}</td>
+    				<td class="text-center"> - </td>
+    				<td class="text-center">{{posts.awayscore}}</td>
+    				<td class="text-center">{{posts.awayteam}}</td>
+    				<td class="text-center">{{posts.homewin}}</td>
+				<td class="text-center">{{posts.session}}</td>
+			    </tr>
+			{% endfor %}
+		        </table>
+		    
+                    
+		    
+	
+	</div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</body>
+</html>
